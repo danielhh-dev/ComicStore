@@ -39,7 +39,7 @@ const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 7 0%;
+  width: 70%;
   margin: 0 auto;
   padding-top: 10px;
   background-color: transparent;
