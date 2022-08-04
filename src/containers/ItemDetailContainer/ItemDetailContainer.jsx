@@ -1,8 +1,8 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import ItemDetail from '../../components/ItemDetail/ItemDetail'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getFetch } from "../../helpers/getFetch";
+// import { getFetch } from "../../helpers/getFetch";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 function ItemDetailContainer() {
@@ -14,7 +14,7 @@ function ItemDetailContainer() {
     const queryDoc = doc(db, 'items', detalleId);
     getDoc(queryDoc)
       .then(res => setProducto({id: res.id, ...res.data() }));
-  }, [])
+  }, [detalleId])
   
   return ( 
       <div>            

@@ -33,7 +33,7 @@ const CartContexProvider = ({ children }) => {
     console.log('carrito: ', cartList)
     
     const totalPrice = () => {
-      return cartList.reduce((prev, act) => prev = act.quantity * act.price, 0);
+      return cartList.reduce((prev, act) => prev + act.quantity * act.price, 0);
     }
 
     const totalProducts = () => cartList.reduce((acumulador, productoActual) => acumulador + productoActual.quantity, 0);
