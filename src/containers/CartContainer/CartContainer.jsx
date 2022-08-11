@@ -1,14 +1,14 @@
 import { useCartContext } from "../../context/CartContext"
 
 const CartContainer = () => {
-    const { cartList, vaciarCarrito } = useCartContext()
+    const { cartList, clearCart } = useCartContext()
 
     return (
       <div>
         { cartList.map(producto => <li>
           {producto.name} {producto.price} {producto.cantidad}
           </li> )}
-        <button onClick={vaciarCarrito}>Vaciar carrito</button>
+        <button onClick={clearCart}>Vaciar carrito</button>
       </div>
     )
 }

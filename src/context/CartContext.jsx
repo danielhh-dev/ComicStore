@@ -1,23 +1,18 @@
-
 import { createContext, useState, useContext } from 'react';
-
 const CartContext = createContext([])
 
 export const useCartContext = () => useContext(CartContext)
 
-
 const CartContexProvider = ({ children }) => {
     // estados y funciones acá
     const [cartList, setCartList] = useState([])
-    /* Sobreescribe la cantidad del producto añaadido
+    /* Sobreescribe la cantidad del producto añadido
     const addProduct = (item, newQuantity) => {
       const newCart =cartList.filter(product => product.id !== item.id);
       newCart.push({ ...item, quantity: newQuantity});
       setCartList(newCart);
     }
     */
-
-    
 
     //Suma la cantidad ya añadida del producto
     const addProduct = (item, quantity) => {

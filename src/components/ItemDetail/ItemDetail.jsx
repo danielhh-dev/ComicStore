@@ -6,12 +6,19 @@ import ItemCount from "../ItemCount/ItemCount";
 
 function ItemDetail({ producto = {} }) {
   const [isCount, setIsCount] = useState(false);
-  const { addProduct } = useCartContext(); // useContext(CartContext)
+  const { addProduct, cartList } = useCartContext(); // useContext(CartContext)
+  
   // onAdd función
   const onAdd = (quantity) => {
     setIsCount(true);
     addProduct(producto, quantity);
   };
+
+
+  //Validar si ya hay productos agregados al cart
+  if ( cartList.some( item => item.id === producto.id ) ) {
+    producto.stock = producto.stock - (cartList.find(item => item.id === producto.id )).quantity;
+  } 
 
 
   return (
@@ -25,7 +32,7 @@ function ItemDetail({ producto = {} }) {
           Ir al carrito
         </Link>
        : 
-       <ItemCount initial={1} stock={5} onAdd={onAdd} />
+       <ItemCount initial={1} stock={producto.stock} onAdd={onAdd} />
       }
     </DetailContainer>
   );

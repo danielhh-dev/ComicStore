@@ -6,8 +6,9 @@ import { addDoc, collection, doc, documentId, getDocs, getFirestore, query, upda
 import ItemCart from "../ItemCart/ItemCart";
 
 function Cart() {
-  const { cartList, totalPrice, vaciarCarrito } = useCartContext();
+  const { cartList, totalPrice, clearCart } = useCartContext();
   const [idCompra, setIdCompra] = useState();
+  const [button, setButton] = useState(false);
 
   const generarOrden = async () => {
     //Generando objeto
@@ -24,6 +25,7 @@ function Cart() {
         price: product.price,
         quantity: product.quantity,
       })),
+      date: new Date(),
       total: totalPrice(),
     };
 
@@ -35,24 +37,26 @@ function Cart() {
     });
 
     //Actualizar el stock
-    // actualizar el stock
+
     const queryCollectionStock = collection(db, "items");
 
     const queryActulizarStock = query(
       queryCollectionStock, //                   ['jlksjfdgl','asljdfks'] -> ejemplo del map ,  
       where( documentId() , 'in', cartList.map(prod => prod.id) ) // in es que estén en ..         
-  )
+    )
 
 
-  const batch = writeBatch(db)
+    const batch = writeBatch(db)
 
-  await getDocs(queryActulizarStock)
-  .then(resp => resp.docs.forEach(res => batch.update(res.ref, {
+    await getDocs(queryActulizarStock)
+    .then(resp => resp.docs.forEach(res => batch.update(res.ref, {
       stock: res.data().stock - cartList.find(item => item.id === res.id).quantity
-  }) ))
-  .catch(err => console.log(err))
+    }) ))
+    .catch(err => console.log(err))
 
     batch.commit();
+
+    setButton(true);
   };
 
   //Render
@@ -75,8 +79,12 @@ function Cart() {
         <ItemCart key={product.id} product={product} />
       ))}
       <p>total: {totalPrice()}</p>
-      <button onClick={generarOrden}>Generar orden de compra</button>
-      <p>El ID de su compra es: {idCompra}</p>
+      <button onClick={clearCart}>Vaciar carrito</button>
+      {
+        button ? 
+        <p>El ID de su compra es: {idCompra}</p>
+        : <button onClick={generarOrden}>Generar orden de compra</button>
+      }  
     </CartStore>
   );
 }
