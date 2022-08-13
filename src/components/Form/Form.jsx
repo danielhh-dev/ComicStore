@@ -17,11 +17,11 @@ function Form() {
   const [idCompra, setIdCompra] = useState();
   const [button, setButton] = useState(false);
 
-  //inicializo funcion para generar orden de compra
-
+  
+  
+  //Generando objeto
   const orderForm = {};
 
-  //Generando objeto
   const initialValue = {
     name: "",
     email: "",
