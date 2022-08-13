@@ -9,7 +9,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
     if (counter < stock) {
       setCounter(counter + 1);
     } else {
-      alert("No hay más en existencia")
+      alert("No hay más en existencia");
     }
   };
 
