@@ -61,6 +61,7 @@ function Form() {
     addDoc(ordersCollection, orderForm).then(({ id }) => {
       setIdCompra(id);
     });
+    console.log(orderForm);
 
     //Actualizar el stock
 
