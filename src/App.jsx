@@ -12,10 +12,7 @@ function App() {
         <div>
           <Navbar />
           <Routes>
-            <Route 
-              index path="/" 
-              element={<ItemListContainer />} 
-            />
+            <Route index path="/" element={<ItemListContainer />} />
             <Route
               path="/category/:categoryId"
               element={<ItemListContainer />}
@@ -24,10 +21,7 @@ function App() {
               path="/detalle/:detalleId"
               element={<ItemDetailContainer />}
             />
-            <Route 
-              path="/cart" 
-              element={<Cart />} 
-            />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
       </CartContextProvider>
